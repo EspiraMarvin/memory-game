@@ -1,3 +1,16 @@
+# Memory Game
+
+## How To Play
+
+### Steps/ Rules
+
+1. If you select 2 matching images, the Images Remain Shown
+
+2. If you select 2 different images, the images flip back
+
+3. The game also indicates number of turns you took to complete it.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
