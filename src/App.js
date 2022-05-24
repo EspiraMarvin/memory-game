@@ -128,7 +128,7 @@ useEffect(() => {
       {  <p className={cards.every(card => card.matched === true) ? 'hide-turns' : 'show-turns'}>Turns: { turns }</p> }
       {  cards.every(card => card.matched === true) && <TotalScore turns={turns} /> }
 
-      <p style={{fontSize: '20px'}}>Developed by 
+      <p style={{fontSize: '20px'}}>Developed by &nbsp;
       <a href="https://www.linkedin.com/in/marvin-espira/"  rel="noreferrer" target="_blank">Marvin Espira</a>
       </p>
     </div>
