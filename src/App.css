@@ -23,8 +23,14 @@ button:hover {
   grid-gap: 20px
 }
 .show-turns {
-  visibility: visible
+  visibility: visible;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 35px;
 }
 .hide-turns {
-  visibility: hidden
+  visibility: hidden;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 25px;
 }

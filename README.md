@@ -13,6 +13,12 @@
 
 [Magic Memory Game](https://magicmemorygame.netlify.app/).
 
+
+##### TODO
+
+1. Individual online accounts
+2. highest scorers feature
+
 ## Available Scripts
 
 In the project directory, you can run:

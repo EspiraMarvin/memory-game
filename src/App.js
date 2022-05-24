@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
+import OnBoarding from './components/OnBoarding';
 import SingleCard from './components/SingleCard'
 import TotalScore from './components/TotalScore';
 
@@ -20,6 +21,12 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
   const [disabled, setDisabled] = useState(false)
+  const [onBoarding, setOnBoarding] = useState(() => JSON.parse(localStorage.getItem('onBoarded')))
+  const elem1  = useRef()
+
+  if(onBoarding === null) {
+    localStorage.setItem('onBoarded', JSON.stringify(false))
+  }
 
   // shuffle cards
   //1. duplicate each card once, because we need 2 cards of each (card/image) for the game,so that a user can match them together
@@ -47,6 +54,11 @@ function App() {
     // console.log('handleChoice card', card)
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
+
+  // handle completing/closing onboarding 
+const handleCloseOnBoarding = () => {
+  setOnBoarding(localStorage.setItem('onBoarded', JSON.stringify(true)))
+}
 
   const resetTurn = () => {
     setChoiceOne(null)
@@ -90,11 +102,18 @@ useEffect(() => {
 
 
   return (
+  <>
+      { !onBoarding && 
+        <OnBoarding
+          handleCloseOnBoarding={handleCloseOnBoarding}
+          style={{ width: '100%'}} elem1={elem1}
+        />
+       }
     <div className="App">
-      <h1>Magic Memory Match</h1>
-      <button onClick={shuffleCards}>New Game</button>
+       <h2>Magic Memory Game</h2> 
+       <button onClick={shuffleCards} >Restart Game</button>
 
-      <div className="card-grid">
+      <div className="card-grid" ref={elem1}>
         {cards.map(card => (
         <SingleCard
           key={card.id} 
@@ -104,10 +123,16 @@ useEffect(() => {
           disabled={disabled}
          />
         ))}
+       
       </div>
       {  <p className={cards.every(card => card.matched === true) ? 'hide-turns' : 'show-turns'}>Turns: { turns }</p> }
-      {  cards.every(card => card.matched === true)  && <TotalScore turns={turns} /> }
+      {  cards.every(card => card.matched === true) && <TotalScore turns={turns} /> }
+
+      <p style={{fontSize: '20px'}}>Developed by 
+      <a href="https://www.linkedin.com/in/marvin-espira/"  rel="noreferrer" target="_blank">Marvin Espira</a>
+      </p>
     </div>
+    </>
   );
 }
 
