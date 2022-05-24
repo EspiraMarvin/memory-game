@@ -82,15 +82,6 @@ useEffect(()  => {
   
 }, [choiceOne, choiceTwo])
 
-const notComplete = () => {
-  cards.filter((card) => {
-    console.log('filter card', card)
-    if (card.matched === false) {
-      return true
-    }
-    return false
-  })
-}
 
 // start the game automatically
 useEffect(() => {
