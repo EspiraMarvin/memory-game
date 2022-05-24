@@ -1,0 +1,9 @@
+.completed {
+    transform: rotateY(0deg);
+    transition: all ease-in 0.2s;
+}
+
+.incomplete {
+    transform: rotateY(90deg);
+    transition: all ease-in 0.2s;
+}

@@ -22,3 +22,9 @@ button:hover {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 20px
 }
+.show-turns {
+  visibility: visible
+}
+.hide-turns {
+  visibility: hidden
+}

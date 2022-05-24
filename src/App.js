@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import SingleCard from './components/SingleCard'
+import TotalScore from './components/TotalScore';
 
 const cardImages = [
   { "src": "/img/helmet-1.png", matched: false},
@@ -10,7 +11,6 @@ const cardImages = [
   { "src": "/img/shield-1.png" ,matched: false },
   { "src": "/img/sword-1.png", matched: false }
 ]
-
 
 
 function App() {
@@ -82,10 +82,21 @@ useEffect(()  => {
   
 }, [choiceOne, choiceTwo])
 
+const notComplete = () => {
+  cards.filter((card) => {
+    console.log('filter card', card)
+    if (card.matched === false) {
+      return true
+    }
+    return false
+  })
+}
+
 // start the game automatically
 useEffect(() => {
   shuffleCards()
 }, [])
+
 
   return (
     <div className="App">
@@ -98,12 +109,13 @@ useEffect(() => {
           key={card.id} 
           card={card} 
           handleChoice={handleChoice}
-          flipped={card === choiceOne || card === choiceTwo || card.matched}
+          flipped={card === choiceOne || card === choiceTwo || card.matched }
           disabled={disabled}
          />
         ))}
       </div>
-      <p>Turns: { turns }</p>
+      {  <p className={cards.every(card => card.matched === true) ? 'hide-turns' : 'show-turns'}>Turns: { turns }</p> }
+      {  cards.every(card => card.matched === true)  && <TotalScore turns={turns} /> }
     </div>
   );
 }
