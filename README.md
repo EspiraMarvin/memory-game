@@ -1,4 +1,4 @@
-# Memory Game
+#  [Magic Memory Game](https://magicmemorygame.netlify.app/).
 
 ## How To Play
 
@@ -11,7 +11,7 @@
 3. The game also indicates number of turns you took to complete it.
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Magic Memory Game](https://magicmemorygame.netlify.app/).
 
 ## Available Scripts
 
