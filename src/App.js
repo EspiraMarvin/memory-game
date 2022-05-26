@@ -21,12 +21,10 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
   const [disabled, setDisabled] = useState(false)
-  const [onBoarding, setOnBoarding] = useState(() => JSON.parse(localStorage.getItem('onBoarded')))
+  const [onBoarding, setOnBoarding] = useState(JSON.parse(localStorage.getItem('onBoarded')))
+  const [showOnBoarding, setShowOnBoarding] = useState(false)
   const elem1  = useRef()
 
-  if(onBoarding === null) {
-    localStorage.setItem('onBoarded', JSON.stringify(false))
-  }
 
   // shuffle cards
   //1. duplicate each card once, because we need 2 cards of each (card/image) for the game,so that a user can match them together
@@ -56,9 +54,16 @@ function App() {
   }
 
   // handle completing/closing onboarding 
-const handleCloseOnBoarding = () => {
-  setOnBoarding(localStorage.setItem('onBoarded', JSON.stringify(true)))
-}
+  const handleCloseOnBoarding = () => {
+    setOnBoarding(localStorage.setItem('onBoarded', JSON.stringify(true)))
+    setShowOnBoarding(false)
+  }
+
+
+  const handleShowOnBoarding = () => {
+    setOnBoarding(localStorage.setItem('onBoarded', JSON.stringify(false)))
+    setShowOnBoarding(true)
+  }
 
   const resetTurn = () => {
     setChoiceOne(null)
@@ -68,7 +73,7 @@ const handleCloseOnBoarding = () => {
   }
 
 // compare 2 selected cards
-useEffect(()  => {
+  useEffect(()  => {
  
  if (choiceOne && choiceTwo) {
   setDisabled(true)
@@ -92,7 +97,7 @@ useEffect(()  => {
 
   }
   
-}, [choiceOne, choiceTwo])
+  }, [choiceOne, choiceTwo])
 
 
 // start the game automatically
@@ -100,18 +105,32 @@ useEffect(() => {
   shuffleCards()
 }, [])
 
-
   return (
   <>
       { !onBoarding && 
         <OnBoarding
+          showOnBoarding={showOnBoarding}
           handleCloseOnBoarding={handleCloseOnBoarding}
           style={{ width: '100%'}} elem1={elem1}
         />
        }
     <div className="App">
        <h2>Magic Memory Game</h2> 
-       <button onClick={shuffleCards} >Restart Game</button>
+       <div style={{ marginTop: '10px', marginBottom: '-100px'}}>
+       <button 
+         onClick={shuffleCards}
+         className="button-start"
+         style={{ marginRight: '8px'}}
+        >
+          Restart Game</button>
+       <button 
+          onClick={handleShowOnBoarding}
+          className="button-start"
+       >
+         How to Play
+          </button>
+       </div>
+  
 
       <div className="card-grid" ref={elem1}>
         {cards.map(card => (

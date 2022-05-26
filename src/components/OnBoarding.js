@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import UserOnboarding from 'react-user-onboarding'
 import 'react-user-onboarding/dist/index.css'
 import './OnBoarding.css'
 
-export default function OnBoarding( { handleCloseOnBoarding, elem1 } ) {
+export default function OnBoarding( { handleCloseOnBoarding, elem1, showOnBoarding } ) {
     
     const [isVisible, setIsVisible] = useState(true)
 
@@ -21,7 +21,7 @@ export default function OnBoarding( { handleCloseOnBoarding, elem1 } ) {
           </p>
 
           <p>
-            Welcome to MAGIC MEMORY GAME App.
+            Welcome to MAGIC MEMORY GAME.
           </p>
 
           <p>
@@ -63,6 +63,13 @@ export default function OnBoarding( { handleCloseOnBoarding, elem1 } ) {
       const handleClose = () => {
         handleCloseOnBoarding()
       }
+
+  
+      useEffect(() => {
+          if(showOnBoarding === true) {
+            setIsVisible(true)
+          }
+      }, [showOnBoarding])
 
   return (
     <div>
