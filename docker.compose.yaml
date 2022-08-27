@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  app:
+    build: .
+    container_name: memory_game_c
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - .:/memory_game
+      - ./node_modules
+    stdin_open: true
+    tty: true  
